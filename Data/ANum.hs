@@ -1,4 +1,4 @@
-module Data.ANum (ANum, unANum) where
+module Data.ANum (ANum(ANum), unANum) where
 
 import Control.Applicative (Applicative, pure, (<*>), liftA, liftA2)
 
