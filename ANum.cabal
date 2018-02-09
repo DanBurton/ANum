@@ -1,5 +1,5 @@
 name:                ANum
-version:             0.1.1.0
+version:             0.2.0.0
 synopsis:            Num instance for Applicatives provided via the ANum newtype
 homepage:            https://github.com/DanBurton/ANum#readme
 bug-reports:         https://github.com/DanBurton/ANum/issues
@@ -16,7 +16,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Data.ANum
   other-extensions:    GeneralizedNewtypeDeriving
-  build-depends:       base == 4.*
+  build-depends:       base >= 4.8 && < 5
   default-language:    Haskell2010
 
 test-suite ANum-test
@@ -32,4 +32,4 @@ source-repository head
 source-repository this
   type: git
   location: git://github.com/DanBurton/ANum.git
-  tag: ANum-0.1.1.0
+  tag: ANum-0.2.0.0
