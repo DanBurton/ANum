@@ -14,6 +14,11 @@ instance (Applicative f) => Applicative (ANum f) where
   pure x = ANum (pure x)
   (ANum f) <*> (ANum x) = ANum (f <*> x)
 
+instance (Foldable f) => Foldable (ANum f) where
+    foldMap f = foldMap f . unANum
+
+instance (Traversable f) => Traversable (ANum f) where
+    traverse f = fmap ANum . traverse f . unANum
 
 instance (Applicative f, Num n) => Num (ANum f n) where
   fromInteger = pure . fromInteger
