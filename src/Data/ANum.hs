@@ -1,13 +1,10 @@
-module Data.ANum (ANum(ANum), unANum) where
+module Data.ANum (ANum(..)) where
 
 import Control.Applicative (Applicative, pure, (<*>), liftA, liftA2)
 
 
-newtype ANum f n = ANum (f n)
-  deriving (Show)
-
-unANum :: ANum f n -> f n
-unANum (ANum x) = x
+newtype ANum f n = ANum { unANum :: f n }
+  deriving (Show, Eq, Ord)
 
 
 instance (Functor f) => Functor (ANum f) where
