@@ -1,12 +1,12 @@
 name:                ANum
-version:             0.2.0.1
+version:             0.2.0.2
 synopsis:            Num instance for Applicatives provided via the ANum newtype
 homepage:            https://github.com/DanBurton/ANum#readme
 bug-reports:         https://github.com/DanBurton/ANum/issues
 license:             BSD3
 license-file:        LICENSE
 author:              Dan Burton
-maintainer:          dan.burton@originate.com
+maintainer:          danburton.email@gmail.com
 copyright:           (c) Dan Burton 2013 - 2018
 category:            Data
 build-type:          Simple
@@ -31,8 +31,3 @@ test-suite ANum-test
 source-repository head
   type: git
   location: git://github.com/DanBurton/ANum.git
-
-source-repository this
-  type: git
-  location: git://github.com/DanBurton/ANum.git
-  tag: ANum-0.2.0.1
