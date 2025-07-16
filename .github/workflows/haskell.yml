@@ -1,0 +1,63 @@
+name: Haskell tests
+
+on: [push, pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        env:
+            STACK_ARGS: --no-terminal --system-ghc --resolver=${{ matrix.snapshot }} --compiler=ghc-${{ matrix.ghc }} --no-install-ghc
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                - snapshot: nightly-2025-07-01
+                  ghc: 9.12.2
+                - snapshot: nightly-2025-07-01
+                  ghc: 9.10.2
+                - snapshot: lts-23.26
+                  ghc: 9.8.4
+                - snapshot: lts-22.6
+                  ghc: 9.6.3
+                - snapshot: lts-21.25
+                  ghc: 9.4.8
+                - snapshot: lts-20.26
+                  ghc: 9.2.8
+                - snapshot: lts-19.33
+                  ghc: 9.0.2
+                - snapshot: lts-18.28
+                  ghc: 8.10.7
+                - snapshot: lts-16.31
+                  ghc: 8.8.4
+                - snapshot: lts-14.27
+                  ghc: 8.6.5
+                - snapshot: lts-12.26
+                  ghc: 8.4.4
+        steps:
+        - uses: actions/checkout@v4
+
+        - name: Setup Haskell Stack
+          uses: haskell-actions/setup@v2
+          with:
+              ghc-version: ${{ matrix.ghc }}
+              enable-stack: true
+              stack-version: 'latest'
+
+        - name: Cache dependencies
+          id: cache-stack
+          uses: actions/cache@v3
+          with:
+              path: ~/.stack
+              key: ${{ runner.os }}-stack-${{ matrix.snapshot }}-${{ matrix.ghc }}-${{ hashFiles('**/stack.yaml') }}
+              restore-keys: |
+                  ${{ runner.os }}-stack-${{ matrix.snapshot }}-${{ matrix.ghc }}-
+
+        - name: Dependencies
+          run: stack ${{ env.STACK_ARGS }} test --dependencies-only
+
+        - name: Build and Test
+          run: |
+            stack ${{ env.STACK_ARGS }} exec -- ghc --version
+            stack ${{ env.STACK_ARGS }} test
