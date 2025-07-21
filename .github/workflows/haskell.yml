@@ -60,4 +60,5 @@ jobs:
         - name: Build and Test
           run: |
             stack ${{ env.STACK_ARGS }} exec -- ghc --version
+            stack ${{ env.STACK_ARGS }} clean
             stack ${{ env.STACK_ARGS }} test

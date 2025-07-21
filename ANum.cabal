@@ -1,5 +1,5 @@
 name:                ANum
-version:             0.2.0.2
+version:             0.2.0.3
 synopsis:            Num instance for Applicatives provided via the ANum newtype
 homepage:            https://github.com/DanBurton/ANum#readme
 bug-reports:         https://github.com/DanBurton/ANum/issues
@@ -24,21 +24,30 @@ tested-with:         GHC == 9.12.2
                    , GHC == 8.6.5
                    , GHC == 8.4.4
 
+flag dev
+  description: Enable strict warnings for development
+  manual: True
+  default: False
+
 library
   default-language:    Haskell2010
-  ghc-options:         -Wcompat -Wall -Werror -Wno-unused-imports
   hs-source-dirs:      src
   exposed-modules:     Data.ANum
   other-extensions:    GeneralizedNewtypeDeriving
   build-depends:       base >= 4.8 && < 5
+  ghc-options:         -Wcompat -Wall -Wno-unused-imports
+  if flag(dev)
+    ghc-options:       -Werror
 
 test-suite ANum-test
   default-language:    Haskell2010
-  ghc-options:         -Wcompat -Wall -Werror
   hs-source-dirs:      test
   main-is:             Main.hs
   type:                exitcode-stdio-1.0
   build-depends:       base, ANum
+  ghc-options:         -Wcompat -Wall
+  if flag(dev)
+    ghc-options:       -Werror
 
 source-repository head
   type: git
