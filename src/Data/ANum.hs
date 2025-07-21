@@ -1,6 +1,6 @@
 module Data.ANum (ANum(..)) where
 
-import Control.Applicative (liftA)
+import Control.Applicative (Applicative, pure, (<*>), liftA, liftA2)
 
 
 newtype ANum f n = ANum { unANum :: f n }
