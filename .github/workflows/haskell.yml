@@ -13,7 +13,7 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                - snapshot: nightly-2025-07-01
+                - snapshot: nightly-2025-07-20
                   ghc: 9.12.2
                 - snapshot: nightly-2025-07-01
                   ghc: 9.10.2
