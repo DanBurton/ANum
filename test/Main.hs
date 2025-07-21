@@ -5,13 +5,14 @@ import System.Exit (exitFailure)
 
 testResults :: [Bool]
 testResults =
-  [ unANum (1 + ANum (Just 1)) == Just 2
-  , unANum (3 * ANum (Just 5)) == Just 15
+  [ unANum (1 + ANum (Just 1)) == Just (2 :: Integer)
+  , unANum (3 * ANum (Just 5)) == Just (15 :: Integer)
   ]
 
 failureCount :: Int
 failureCount = length $ filter (== False) testResults
 
+totalTests :: Int
 totalTests = length testResults
 
 testsFailed :: IO ()
